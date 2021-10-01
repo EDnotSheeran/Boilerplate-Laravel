@@ -15,7 +15,7 @@ Para iniciar o projeto tenha certeza de que voce tem o docker instalado, se esti
 
 _todos os comandos utilizados estarao no package.json caso queira um atalho usando o yarn_
 
-Abra o terminal na pasta onde este repositorio foi clonado e construa apenas o primeiro container contendo o servidor web nginx, para isso rode o seguinte comando `docker-compose up -d --build app`.
+Abra o terminal na pasta onde este repositorio foi clonado e construa apenas o primeiro container contendo o servidor web nginx, o php e banco postgres, para isso rode o seguinte comando `docker-compose up -d --build app`.
 
 Entre na pasta `src` e apague o arquivo `README.md`, mova seu projeto laravel para esta pasta ou crie um novo com o comando `docker-compose run --rm composer create-project laravel/laravel .`
 
