@@ -19,7 +19,7 @@ Abra o terminal na pasta onde este repositorio foi clonado e construa apenas o p
 
 Entre na pasta `src` e apague o arquivo `README.md`, mova seu projeto laravel para esta pasta ou crie um novo com o comando `docker-compose run --rm composer create-project laravel/laravel .`
 
-Construindo apenas o primeiro container `app` ao inves de apenas usar `docker-compose up -d` faz com que os outros container nao apresentem erros devido a falta do projeto.
+Construindo apenas o primeiro container `app` ao inves de apenas usar `docker-compose up -d` faz com que os outros containers nao sejam construidos, pois nao serao necessarios ha todo momento.
 
 Os container terao as seguintes portas expostas:
 
