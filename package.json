@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "docker-compose up",
+    "build": "docker-compose up -d --build app",
     "stop": "docker-compose down",
     "clean": "docker system prune -af",
     "clean-volumes": "docker system prune -f",

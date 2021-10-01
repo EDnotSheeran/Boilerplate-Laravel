@@ -9,13 +9,54 @@ Boilerplate para se usado em projetos laravel simples, um modo facil e rapido de
 - Requisitos Opcionais
   - [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) ou npm
 
-<details>
-  <summary>Iniciando o projeto</summary>
+## Iniciando o projeto
 
-- Para inicia o projeto execute o seguinte comando `docker-compose up --build`
+Para iniciar o projeto tenha certeza de que voce tem o docker instalado, se estiver usando windows o wsl2 tabem se torna obrigatorio uma vez que o docker necessita dele.
 
-- Para parar a execucao do container execute `docker-compose down`
+_todos os comandos utilizados estarao no package.json caso queira um atalho usando o yarn_
 
-- Sua aplicacao devera estar rodando na seguinte url `http://localhost`
+Abra o terminal na pasta onde este repositorio foi clonado e construa apenas o primeiro container contendo o servidor web nginx, para isso rode o seguinte comando `docker-compose up -d --build app`.
 
-</details>
+Entre na pasta `src` e apague o arquivo `README.md`, mova seu projeto laravel para esta pasta ou crie um novo com o comando `docker-compose run --rm composer create-project laravel/laravel .`
+
+Construindo apenas o primeiro container `app` ao inves de apenas usar `docker-compose up -d` faz com que os outros container nao apresentem erros devido a falta do projeto.
+
+Os container terao as seguintes portas expostas:
+
+- nginx: `:80`
+- posgres: `:5432`
+- npm: `:3000` e `:3001`
+
+Caso voce ja tenha os aquivos do projeto e nao tenha as dependencias instaladas o seguinte erro pode ocorrer
+
+`Warning: require(/var/www/html/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /var/www/html/public/index.php on line 34`
+
+para corrigir isso faca o download das depencias com o comando:
+
+- `docker-compose run --rm composer update`
+
+para rodar o script de desenvolvimento do `npm` utilize o seguinte comando:
+
+- `docker-compose run --rm npm run dev`
+
+para criar migrations:
+
+- `docker-compose run --rm artisan migrate`
+
+## Problemas com permissoes
+
+Caso tenha problemas compermissoes siga o seguinte procedimento:
+
+- remova os containers com o comando `docker-compose down`
+- no arquivo `.env` modigique os valores para que o usuario e o grupo sejam os mesmos do proprietario da pasta `src`
+- suba container denovo: `docker-compose build --no-cache`
+
+## Hot Reload
+
+Caso queira usar o hotreload do webpack adicione a seguinte configuracao no aquivo `webpack.mix.js`:
+
+`.browserSync({ proxy: 'nginx', open: false, port: 3000, });`
+
+no terminal inicie o watch-mode do npm com o seguinte comando:
+
+`docker-compose run --rm --service-ports npm run watch`
